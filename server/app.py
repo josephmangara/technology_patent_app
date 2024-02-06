@@ -3,13 +3,13 @@
 from flask import Flask, make_response, request, jsonify
 from flask_migrate import Migrate
 from flask_restful import Api, Resource
-from models import db, Patent
+from models import db, Patent, Inventors, User, Classification
 from collections import OrderedDict
 
 app = Flask(__name__)
 api = Api(app)
 
-app.config['SQLALCHEMY_DATABASE_URI'] = 'sqlite:///restaurants.db'
+app.config['SQLALCHEMY_DATABASE_URI'] = 'sqlite:///patents.db'
 app.config['SQLALCHEMY_TRACK_MODIFICATIONS'] = False
 app.config['JSONIFY_PRETTYPRINT_REGULAR'] = False
 
