@@ -169,9 +169,6 @@ class ClassificationById(Resource):
     
 api.add_resource(ClassificationById, '/classifications/<int:id>')
 
-<<<<<<< server
-
-=======
 #users
 class Users(Resource):
     def get(self):
@@ -286,7 +283,6 @@ class InventorSi(Resource):
         )
         return response
 api.add_resource(InventorSi, '/inventors')
->>>>>>> main
         
 if __name__ == '__main__':
     app.run(port=5555, debug=True)
