@@ -237,10 +237,27 @@ class UsersById(Resource):
                 'id': user.id,
                 'name': user.name,
                 'affiliation': user.affiliation,
-                'email': user.email}
+                'email': user.email,
+                "patents": [
+                    {
+                        "id": user_patent.id,
+                        "title": user_patent.title,
+                        "summary": user_patent.summary,
+                        "patent_status": user_patent.patent_status
+                    } 
+                    for user_patent in user.patents
+                ]
+            }
             response = make_response(
                 jsonify(response_dict),
                 200,
+            )
+            return response
+        
+        else:
+            response = make_response(
+                jsonify({"error": "User not found!"}),
+                404
             )
             return response
         
@@ -275,7 +292,7 @@ class InventorSi(Resource):
             inventor_dict = {
                 'id': inventor.id,
                 'goup_name': inventor.group_name,
-                                        }
+                }
             inventors.append(inventor_dict)
         response = make_response(
             jsonify(inventors),

@@ -8,7 +8,8 @@ db = SQLAlchemy()
 inventors_patent = db.Table(
     'inventors_patent',
     db.Column('patent_id', db.Integer, db.ForeignKey('patents.id'), primary_key=True),
-    db.Column('inventors_id', db.Integer, db.ForeignKey('inventors.id'), primary_key=True)
+    db.Column('inventor_id', db.Integer, db.ForeignKey('inventors.id'), primary_key=True),
+    extend_existing=True,
 )
 
 class Patent(db.Model):

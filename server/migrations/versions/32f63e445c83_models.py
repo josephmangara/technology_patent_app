@@ -1,8 +1,8 @@
-"""models and tables
+"""models
 
-Revision ID: 6cb23fb57bae
+Revision ID: 32f63e445c83
 Revises: 
-Create Date: 2024-02-06 12:30:32.246671
+Create Date: 2024-02-07 15:44:23.225765
 
 """
 from alembic import op
@@ -10,7 +10,7 @@ import sqlalchemy as sa
 
 
 # revision identifiers, used by Alembic.
-revision = '6cb23fb57bae'
+revision = '32f63e445c83'
 down_revision = None
 branch_labels = None
 depends_on = None
@@ -34,6 +34,7 @@ def upgrade():
     sa.Column('name', sa.String(length=250), nullable=False),
     sa.Column('affiliation', sa.String(), nullable=True),
     sa.Column('email', sa.String(), nullable=True),
+    sa.Column('password', sa.String(), nullable=True),
     sa.PrimaryKeyConstraint('id')
     )
     op.create_table('patents',
@@ -51,10 +52,10 @@ def upgrade():
     )
     op.create_table('inventors_patent',
     sa.Column('patent_id', sa.Integer(), nullable=False),
-    sa.Column('inventors_id', sa.Integer(), nullable=False),
-    sa.ForeignKeyConstraint(['inventors_id'], ['inventors.id'], ),
+    sa.Column('inventor_id', sa.Integer(), nullable=False),
+    sa.ForeignKeyConstraint(['inventor_id'], ['inventors.id'], ),
     sa.ForeignKeyConstraint(['patent_id'], ['patents.id'], ),
-    sa.PrimaryKeyConstraint('patent_id', 'inventors_id')
+    sa.PrimaryKeyConstraint('patent_id', 'inventor_id')
     )
     # ### end Alembic commands ###
 
