@@ -5,6 +5,8 @@ import Classification from "./components/Classification";
 import Login from "./components/Login";
 import Inventors from "./components/Inventors";
 import Home from "./components/Home";
+import Footer from "./components/Footer";
+
 
 function App() {
   return (
@@ -12,30 +14,18 @@ function App() {
       <Navbar />
       <main>
         <Routes>
-        <Route exact path="/patents">
-            <Patent />
-          </Route>
-          <Route exact path="/patents/<int:id>">
-            <Patent />
-          </Route>
-          <Route exact path="/classifications">
-            <Classification />
-          </Route>
-          <Route exact path="/classifications/<int:id>">
-            <Classification />
-          </Route>
-          <Route exact path="/users">
-            <Login />
-          </Route>
-          <Route exact path="/users/<int:id>">
-            <Login />
-          </Route>
-          <Route exact path="/inventors">
-            <Inventors />
-          </Route>
-          <Route exact path="/"><Home /></Route>
+          <Route path = '/' element = {<Home />} />
+          <Route path = '/patents' element = {<Patent />} />
+          <Route path = '/patents/<int:id>' element = {<Patent />} />
+          <Route path = '/classifications' element = {<Classification />} />
+          <Route path = '/classifications/<int:id>' element = {<Classification />} />
+          <Route path = '/users' element = {<Login />} />
+          <Route path = '/users/<int:id>' element = {<Login />} />
+          <Route path = '/inventors' element = {<Inventors />} />
+          <Route path = '/' element = {<Home />} />
         </Routes>
       </main>
+      <Footer />
     </div>
   );
 }
