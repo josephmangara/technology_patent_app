@@ -23,10 +23,9 @@ return (
         {patents.map((patent, id) => (
         <li key={id} id="display-patents">
             <h3>{patent.title}</h3>
-            <p>Patent Status: {patent.patent_status}</p>
             <h4>Summary</h4>
             <p>{patent.summary}</p>
-            
+            <p>Patent Status: {patent.patent_status}</p>
         </li>
         ))}
       </ul>
