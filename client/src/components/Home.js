@@ -3,7 +3,7 @@ export default function Home(){
 
     return (
         <>
-          <h1>Patents hhhhh</h1>
+          {/* <h1>Patents </h1> */}
         </>
     )
     }

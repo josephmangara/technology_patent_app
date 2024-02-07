@@ -47,7 +47,7 @@ with app.app_context():
 
     patents = []
        
-    for i in range(70):
+    for i in range(15):
         patent_number = f'{i:03d}'
 
         random_user = choice(User.query.all())
