@@ -24,6 +24,7 @@ return (
         {inventors.map((inventor, id) => (
         <li key={id} id="display-inventors">
             <h3>{inventor.group_name}</h3>
+            {/* <p>{inventor.patents}</p> */}
         </li>
         ))}
       </ul>

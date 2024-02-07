@@ -4,7 +4,6 @@ from flask import Flask, make_response, request, jsonify
 from flask_migrate import Migrate
 from flask_restful import Api, Resource
 from models import db, Patent, Inventors, User, Classification
-from collections import OrderedDict
 
 app = Flask(__name__)
 api = Api(app)
@@ -94,18 +93,30 @@ class PatentById(Resource):
     def get(self, id):
         patent = Patent.query.filter_by(id=id).first()
 
+        creator = User.query.filter_by(id=patent.user_id).first()
+        creator_dict = {
+            "id": creator.id,
+            "name": creator.name
+        }
         if patent:
             response_dict = {
                 "id": patent.id,
                 "title": patent.title,
                 "patent_status": patent.patent_status,
-                "summary": patent.summary
+                "summary": patent.summary,
+                "patent_creator": creator_dict
             }
             response = make_response(
                 jsonify(response_dict),
                 200,
             )
             return response 
+        else:
+            response = make_response(
+                jsonify({"error": "Patent not found!"}),
+                404
+            )
+            return response
         
     # Delete a patent 
     def delete(self, id):
@@ -293,8 +304,7 @@ class InventorSi(Resource):
         for inventor in Inventors.query.all():
             inventor_dict = {
                 'id': inventor.id,
-                'goup_name': inventor.group_name
-                # 'patents': patent_list
+                'group_name': inventor.group_name
                 }
             inventors.append(inventor_dict)
         response = make_response(
