@@ -57,7 +57,7 @@ class Patents(Resource):
 
             # patent = Patent.query.filter_by(id=id).first()
             if title is None or patent_status is None or summary is None:
-                response_dict = {"message": "Either title, patent status, or summary field is empy"}
+                response_dict = {"message": "Either title, patent status, or summary field is empty"}
                 response = make_response(
                     jsonify(response_dict),
                     404,
@@ -165,10 +165,128 @@ class ClassificationById(Resource):
                 200,
             )
             return response 
-        
+    
+    
 api.add_resource(ClassificationById, '/classifications/<int:id>')
 
+<<<<<<< server
 
+=======
+#users
+class Users(Resource):
+    def get(self):
+        users = []
+        for user in User.query.all():
+            users_dict = {
+                'id': user.id,
+                'name': user.name,
+                'affiliation': user.affiliation,
+                'email': user.email
+                                        }
+            users.append(users_dict)
+        response = make_response(
+            jsonify(users),
+            200,
+        )
+        return response
+    
+    def post(self):
+        try: 
+            data = request.get_json()
+
+            name=data.get("name") 
+            affiliation=data.get("affiliation") 
+            email=data.get("email") 
+            password=data.get("password")
+
+            if name is None or affiliation is None or email is None or password is None:
+                response_dict = {"message": "Either name, affiliation,email or password field is empty"}
+                response = make_response(
+                    jsonify(response_dict),
+                    404,
+                )
+                return response
+            
+            else:
+                new_user = User(
+                    name=name, 
+                    affiliation=affiliation, 
+                    email=email, 
+                    password=password, 
+                    )
+                db.session.add(new_user)
+                db.session.commit()
+
+                response = make_response(
+                    jsonify({"message": "successful"}),
+                    201,
+                )
+            return response 
+        
+        except:
+            err_dict= {"errors": "validation errors"}
+            response = make_response(err_dict, 404)
+            db.session.rollback()
+            return response 
+    
+api.add_resource(Users, '/users')
+
+#users by Id
+class UsersById(Resource):
+    def get(self, id):
+        user = User.query.filter_by(id=id).first()
+        if user:
+            response_dict = {
+                'id': user.id,
+                'name': user.name,
+                'affiliation': user.affiliation,
+                'email': user.email}
+            response = make_response(
+                jsonify(response_dict),
+                200,
+            )
+            return response
+        
+    # Delete a user 
+    def delete(self, id):
+        user = User.query.filter_by(id=id).first()
+
+        if user:
+            db.session.delete(user)
+            
+            response_dict = {"message": "record successfully deleted"}
+
+            response = make_response(
+                jsonify(response_dict),
+                204
+            )
+            db.session.commit()
+        else:
+            response = make_response(
+                jsonify({"error": "user not found!"}),
+                404
+            )
+        return response 
+        
+api.add_resource(UsersById, '/users/<int:id>')
+
+# Inventors
+class InventorSi(Resource):
+    def get(self):
+        inventors = []
+        for inventor in Inventors.query.all():
+            inventor_dict = {
+                'id': inventor.id,
+                'goup_name': inventor.group_name,
+                                        }
+            inventors.append(inventor_dict)
+        response = make_response(
+            jsonify(inventors),
+            200,
+        )
+        return response
+api.add_resource(InventorSi, '/inventors')
+>>>>>>> main
         
 if __name__ == '__main__':
     app.run(port=5555, debug=True)
