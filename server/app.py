@@ -21,7 +21,7 @@ db.init_app(app)
 
 class Home(Resource):
     def get(self):
-        return jsonify({"message":  "Welcome to the patent technologyAPI."})
+        return jsonify({"message":  "Welcome to the patent technology API."})
     
 api.add_resource(Home, '/')
 
@@ -232,21 +232,23 @@ api.add_resource(Users, '/users')
 class UsersById(Resource):
     def get(self, id):
         user = User.query.filter_by(id=id).first()
+
+        patents_list = []
+        for user_patent in user.patents:
+            patent_dict = {
+                        "id": user_patent.id,
+                        "title": user_patent.title,
+                        "summary": user_patent.summary,
+                        "patent_status": user_patent.patent_status
+                    } 
+            patents_list.append(patent_dict)
         if user:
             response_dict = {
                 'id': user.id,
                 'name': user.name,
                 'affiliation': user.affiliation,
                 'email': user.email,
-                "patents": [
-                    {
-                        "id": user_patent.id,
-                        "title": user_patent.title,
-                        "summary": user_patent.summary,
-                        "patent_status": user_patent.patent_status
-                    } 
-                    for user_patent in user.patents
-                ]
+                "patents": patents_list
             }
             response = make_response(
                 jsonify(response_dict),
@@ -291,7 +293,8 @@ class InventorSi(Resource):
         for inventor in Inventors.query.all():
             inventor_dict = {
                 'id': inventor.id,
-                'goup_name': inventor.group_name,
+                'goup_name': inventor.group_name
+                # 'patents': patent_list
                 }
             inventors.append(inventor_dict)
         response = make_response(
@@ -299,7 +302,45 @@ class InventorSi(Resource):
             200,
         )
         return response
+    
 api.add_resource(InventorSi, '/inventors')
+
+# Inventors by ID
+class InventorsById(Resource):
+    def get(self, id):
+        inventors = Inventors.query.filter_by(id=id).first()
+        patents = Patent.query.all()
+        patents_list = []
+        
+        for inventors_patent in patents:
+            patent_dict = {
+                        "id": inventors_patent.id,
+                        "title": inventors_patent.title,
+                        "summary": inventors_patent.summary,
+                        "patent_status": inventors_patent.patent_status
+                    } 
+            patents_list.append(patent_dict)
+
+        if inventors:
+            response_dict = {
+                'id': inventors.id,
+                'group_name': inventors.group_name,
+                "patents": patents_list
+            }
+            response = make_response(
+                jsonify(response_dict),
+                200,
+            )
+            return response
+        
+        else:
+            response = make_response(
+                jsonify({"error": "Inventors not found!"}),
+                404
+            )
+            return response
+        
+api.add_resource(InventorsById, '/inventors/<int:id>')
         
 if __name__ == '__main__':
     app.run(port=5555, debug=True)
