@@ -34,12 +34,15 @@ class User(db.Model):
     name = db.Column(db.String(250), nullable=False)
     affiliation = db.Column(db.String)
     email = db.Column(db.String)
+    password = db.Column(db.String)
 
     patents = db.relationship('Patent', backref="users")
 
     @validates('email')
     def validate_email(self, key, value):
-        pass
+        if '@' not in value:
+            raise ValueError("Invalid email")
+        return value
 
 class Classification(db.Model):
     __tablename__ = 'classifications'
