@@ -4,7 +4,6 @@ import Patent from './components/Patents';
 import Classification from "./components/Classification";
 import Login from "./components/Login";
 import Inventors from "./components/Inventors";
-import Home from "./components/Home";
 import Footer from "./components/Footer";
 
 
@@ -12,6 +11,7 @@ function App() {
   return (
     <div>
       <Navbar />
+      <hr />
       <main>
         <Routes>
           <Route path = '/' element = {<Patent />} />
@@ -22,7 +22,6 @@ function App() {
           <Route path = '/users' element = {<Login />} />
           <Route path = '/users/<int:id>' element = {<Login />} />
           <Route path = '/inventors' element = {<Inventors />} />
-          <Route path = '/' element = {<Home />} />
         </Routes>
       </main>
       <Footer />

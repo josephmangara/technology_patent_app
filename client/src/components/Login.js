@@ -1,9 +1,20 @@
-import React, {useState} from  'react';
+import React, {useState, useEffect} from  'react';
+import { json } from 'react-router-dom';
 export default function Login(){
     const [email, setEmail] = React.useState("");
     const [password, setPassword] = React.useState("")
-    const [submittedData, setSubmittedData] = useState([]);
+    const [formErrors, setFormErrors] = useState([]);
+    const [name, setName] = useState('')
+    const [affiliation, setAffiliation] = useState([]);
 
+    function handleName(event) {
+        setName(event.target.value)
+    }
+
+    function handleAffiliation(event) {
+        setAffiliation(event.target.value)
+    }
+        
     function handleEmail(event) {
         setEmail(event.target.value);
     }
@@ -15,29 +26,41 @@ export default function Login(){
     function handleSubmit(event) {
       event.preventDefault();
       const formData = { email: email, password: password };
-      const dataArray = [...submittedData, formData];
-      setSubmittedData(dataArray);
-      setEmail("");
-      setPassword("");
+      fetch("/users", {
+        method: "POST",
+        headers: {
+            "Content-Type": "application/json"
+        },
+        body:JSON.stringify(formData),
+    }).then((r) => {
+        if (r.ok) {
+            r.json().then((new_user)=>{
+                handleEmail(new_user);
+                setFormErrors([]);
+            });
+        } else{
+            r.json().then((err) => setFormErrors(err.errors));
+        }
+    })
     }
-  
-    const listOfSubmissions = submittedData.map((data, index) => {
-      return (
-        <div key={index}>
-          {data.email} {data.password}
-        </div>
-      );
-    });
   
     return (
       <div>
-        <form onSubmit={handleSubmit}>
-          <input type="text" onChange={handleEmail} value={email} />
-          <input type="text" onChange={handlePassword} value={password} />
-          <button type="submit">Submit</button>
+        <form id='login-form' onSubmit={handleSubmit}>
+        <label>Name</label>
+            <input type="text" onChange={handleName} value={name} placeholder='name' className='input' /><br />
+            <label>Affiliation</label>
+                <select onChange={handleAffiliation} value={affiliation} placeholder='affiliation' className='input' >
+                    <option value="university">university</option>
+                    <option value="organisation">organisation</option>
+                    <option value="individual">individual</option>
+                </select>
+            <label>Email</label>
+            <input type="text" onChange={handleEmail} value={email} placeholder='email' className='input' /><br />
+            <label>Password</label>
+            <input type="text" onChange={handlePassword} value={password} placeholder='password' className='input'/><br />
+            <button type="submit" className='input'>Submit</button>
         </form>
-        <h3>Submissions</h3>
-        {listOfSubmissions}
       </div>
     );
 }
