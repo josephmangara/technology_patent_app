@@ -5,7 +5,7 @@ import Classification from "./components/Classification";
 import Login from "./components/Login";
 import Inventors from "./components/Inventors";
 import Footer from "./components/Footer";
-
+import Signin from "./components/Signin";
 
 function App() {
   return (
@@ -20,6 +20,7 @@ function App() {
           <Route path = '/classifications' element = {<Classification />} />
           <Route path = '/classifications/<int:id>' element = {<Classification />} />
           <Route path = '/users' element = {<Login />} />
+          <Route path = '/login' element = {<Signin />} />
           <Route path = '/users/<int:id>' element = {<Login />} />
           <Route path = '/inventors' element = {<Inventors />} />
         </Routes>
