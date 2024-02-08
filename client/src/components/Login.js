@@ -4,9 +4,16 @@ export default function Login(){
     const [email, setEmail] = React.useState("");
     const [password, setPassword] = React.useState("")
     const [formErrors, setFormErrors] = useState([]);
-    const [name, setName] = useState('')
-    const [affiliation, setAffiliation] = useState([]);
+    const [name, setName] = useState("")
+    const [affiliation, setAffiliation] = useState("");
 
+    useEffect(() => {
+        fetch("/users")
+        .then((response) => response.json())
+        .then((data) => {
+           
+            setName(data)})
+    },[])
     function handleName(event) {
         setName(event.target.value)
     }
@@ -25,7 +32,7 @@ export default function Login(){
   
     function handleSubmit(event) {
       event.preventDefault();
-      const formData = { email: email, password: password };
+      const formData = { email: email, password: password, affiliation:affiliation, name:name };
       fetch("/users", {
         method: "POST",
         headers: {
@@ -35,7 +42,7 @@ export default function Login(){
     }).then((r) => {
         if (r.ok) {
             r.json().then((new_user)=>{
-                handleEmail(new_user);
+                setEmail(new_user.email); 
                 setFormErrors([]);
             });
         } else{
@@ -59,7 +66,8 @@ export default function Login(){
             <input type="text" onChange={handleEmail} value={email} placeholder='email' className='input' /><br />
             <label>Password</label>
             <input type="text" onChange={handlePassword} value={password} placeholder='password' className='input'/><br />
-            <button type="submit" className='input'>Submit</button>
+            <button type="submit" className='input'>Sign in</button>
+            <p>Login Successful {}</p>
         </form>
       </div>
     );
