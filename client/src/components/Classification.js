@@ -15,8 +15,7 @@ export default function Classification(){
             console.error('Error fetching Classifications:', error);
           });
     }, [])
-    
-    
+  
     return (
         <div>
           <h1>classifications List</h1>
