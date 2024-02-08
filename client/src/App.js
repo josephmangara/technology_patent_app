@@ -14,7 +14,7 @@ function App() {
       <Navbar />
       <main>
         <Routes>
-          <Route path = '/' element = {<Home />} />
+          <Route path = '/' element = {<Patent />} />
           <Route path = '/patents' element = {<Patent />} />
           <Route path = '/patents/<int:id>' element = {<Patent />} />
           <Route path = '/classifications' element = {<Classification />} />
