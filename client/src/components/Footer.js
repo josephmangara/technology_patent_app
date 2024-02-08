@@ -1,8 +1,8 @@
 export default function Footer(){
 
 return (
-  <>
-    {/* <h3>Footer component</h3> */}
-  </>
+  <div id="footer">
+    <p id="footer-text">Copyright </p>
+  </div>
 )
 }

@@ -7,6 +7,7 @@ export default function Login(){
     const [formErrors, setFormErrors] = useState([]);
     const [name, setName] = useState("")
     const [affiliation, setAffiliation] = useState("");
+    const [accountMessage, setAccountMessage] = React.useState("");
 
     function handleName(event) {
         setName(event.target.value)
@@ -37,15 +38,13 @@ export default function Login(){
         if (r.ok) {
             r.json().then((new_user)=>{
                 setEmail(new_user.email); 
-                setFormErrors([]);
+                setAccountMessage(`Successfully created an account.`);
             });
         } else{
             r.json().then((err) => setFormErrors(err.errors));
         }
     })
     }
-    
-
 
     return (
       <div className='login-box'>
@@ -65,7 +64,8 @@ export default function Login(){
             <label>Password</label>
             <input type="text" onChange={handlePassword} value={password} placeholder='password' className='input'/><br />
             <button type="submit" className='input'>Create Account</button>
-            {/* <p>Login Successful {}</p> */}
+            {accountMessage && <p>{accountMessage}</p>} 
+            {formErrors && <p>{formErrors}</p>}
         </form>
       </div>
     );
