@@ -20,7 +20,7 @@ export default function Classification(){
     return (
         <div>
           <h1>classifications List</h1>
-          <ul className="lists">
+          <ul className="not">
             {classifications.map((code, id) => (
             <li key={id} id="display-classes">
                 <h3>{code.class_code}</h3>

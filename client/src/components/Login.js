@@ -7,13 +7,6 @@ export default function Login(){
     const [name, setName] = useState("")
     const [affiliation, setAffiliation] = useState("");
 
-    useEffect(() => {
-        fetch("/users")
-        .then((response) => response.json())
-        .then((data) => {
-           
-            setName(data)})
-    },[])
     function handleName(event) {
         setName(event.target.value)
     }

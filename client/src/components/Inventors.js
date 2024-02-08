@@ -16,10 +16,22 @@ useEffect(() => {
       });
 }, [])
 
+// useEffect(() => {
+//   fetch(`/inventors/${id}`)
+//   .then(res => res.json())
+//   .then(data => {
+//       console.log(data)
+//       setInventors(data)
+//   })
+//   .catch(error => {
+//       console.error('Error fetching Inventors:', error);
+//     });
+// }, [])
+
 
 return (
     <div>
-      <h1>Patents List</h1>
+      <h1>List of patents belonging to multiple inventors.</h1>
       <ul className="lists">
         {inventors.map((inventor, id) => (
         <li key={id} id="display-inventors">
