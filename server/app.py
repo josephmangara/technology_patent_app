@@ -1,6 +1,6 @@
 #!/usr/bin/env python3
 
-from flask import Flask, make_response, request, jsonify
+from flask import Flask, make_response, request, jsonify, session 
 from flask_migrate import Migrate
 from flask_restful import Api, Resource
 from models import db, Patent, Inventors, User, Classification
@@ -23,7 +23,7 @@ class Home(Resource):
         return jsonify({"message":  "Welcome to the patent technology API."})
     
 api.add_resource(Home, '/')
-
+# Patent views 
 class Patents(Resource):
     def get(self):
         patents = []
@@ -93,19 +93,29 @@ class PatentById(Resource):
     def get(self, id):
         patent = Patent.query.filter_by(id=id).first()
 
-        creator = User.query.filter_by(id=patent.user_id).first()
-        creator_dict = {
-            "id": creator.id,
-            "name": creator.name
-        }
         if patent:
+            classification = Classification.query.filter_by(id=patent.classification_id).first()
+
+            creator = User.query.filter_by(id=patent.user_id).first()
+            creator_dict = {
+                "id": creator.id,
+                "name": creator.name
+            }
+            classification_dict = {
+                "id": classification.id,
+                "class_code": classification.class_code,
+                "description": classification.description
+            }
+
             response_dict = {
                 "id": patent.id,
                 "title": patent.title,
                 "patent_status": patent.patent_status,
                 "summary": patent.summary,
-                "patent_creator": creator_dict
+                "patent_creator": creator_dict,
+                "classification": classification_dict
             }
+
             response = make_response(
                 jsonify(response_dict),
                 200,
@@ -208,7 +218,7 @@ class Users(Resource):
             password=data.get("password")
 
             if name is None or affiliation is None or email is None or password is None:
-                response_dict = {"message": "Either name, affiliation,email or password field is empty"}
+                response_dict = {"message": "Either name, affiliation, email or password field is empty!"}
                 response = make_response(
                     jsonify(response_dict),
                     404,
@@ -232,12 +242,30 @@ class Users(Resource):
             return response 
         
         except:
-            err_dict= {"errors": "validation errors"}
+            err_dict= {"errors": "Either name, affiliation,email or password field is empty"}
             response = make_response(err_dict, 404)
             db.session.rollback()
             return response 
     
 api.add_resource(Users, '/users')
+
+class Login(Resource):
+    def post(self):
+        request_data = request.get_json()
+        if not request_data or 'email' not in request_data:
+            return jsonify({"message": "email not provided"}), 400
+        
+        email = request_data['email']
+        user = User.query.filter_by(email=email).first()
+
+        if user:
+            session['user_id'] = user.id
+            return {"user": user.email}, 200
+
+        else:
+            return jsonify({"message": "User not found"}), 404
+
+api.add_resource(Login, '/login')
 
 #users by Id
 class UsersById(Resource):

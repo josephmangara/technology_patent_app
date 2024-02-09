@@ -41,7 +41,7 @@ class User(db.Model):
 
     @validates('email')
     def validate_email(self, key, value):
-        if '@' not in value:
+        if '@' not in value and '.com' not in value:
             raise ValueError("Invalid email")
         return value
 
