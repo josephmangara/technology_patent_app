@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React from 'react';
 
 function Signin() {
     const [email, setEmail] = React.useState("");
@@ -26,26 +26,26 @@ function Signin() {
 
     return (
         <>
-            <form onSubmit={handleSubmit}>
-                <h5>Login with email and password</h5>
-                <input
+            <form onSubmit={handleSubmit} id='login-form'>
+                <h4>Login with email and password</h4>
+                <input className='login-fields'
                     type="text"
                     id="username"
                     value={email}
                     onChange={(e) => setEmail(e.target.value)}
                 />
                 <label htmlFor="email">email </label><br />
-                <input
+                <input className='login-fields'
                     type="password" 
                     id="password"
                     value={password}
                     onChange={(e) => setPassword(e.target.value)}
                 />
                 <label htmlFor="password">password </label><br />
-                <button type='submit'>Log in</button>
+                <button type='submit' id='login-btn'>Log in</button>
                 <hr />
+                {loginMessage && <p>{loginMessage}</p>} 
             </form>
-            {loginMessage && <p>{loginMessage}</p>} 
         </>
     );
 }
