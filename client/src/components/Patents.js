@@ -1,7 +1,9 @@
-import { useState, useEffect } from "react";
+import React, { useState, useEffect } from "react";
+import { useNavigate } from "react-router-dom";
 
 export default function Patent(){
 const [patents, setPatents] = useState([])
+const navigate = useNavigate();
 
 useEffect(() => {
     fetch('/patents')
@@ -15,20 +17,23 @@ useEffect(() => {
       });
 }, [])
 
+const handleClick = (id) => {
+  navigate(`/patents/${id}`, { replace: true }); 
+};
 
 return (
-    <div>
-      <h1>Patents List</h1>
-      <ul className="lists">
+    <div id="patents-page">
+      <h2 id="patents">Patents</h2>
+      <ol className="lists">
         {patents.map((patent, id) => (
-        <li key={id} id="display-patents">
-            <h3>{patent.title}</h3>
-            <h4>Summary</h4>
+        <li key={id} id="display-patents" onClick={() => handleClick(patent.id)}>
+            <h4>{patent.title}</h4>
+            <h5>Summary</h5>
             <p>{patent.summary}</p>
             <p>Patent Status: {patent.patent_status}</p>
         </li>
         ))}
-      </ul>
+      </ol>
     </div>
 )
 }

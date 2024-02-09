@@ -47,7 +47,10 @@ export default function Login(){
     }
 
     return (
-      <div className='login-box'>
+      <div className='login-box' 
+      style={{
+        backgroundImage: `url("https://images.unsplash.com/photo-1609579426324-74a8a0206ce1?q=80&w=774&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D")`
+      }}>
          <Link to="/login">Click Here to Login</Link><hr />
 
         <form id='login-form' onSubmit={handleSubmit}>
@@ -66,7 +69,7 @@ export default function Login(){
             <button type="submit" className='input'>Create Account</button>
             {accountMessage && <p>{accountMessage}</p>} 
             {formErrors && <p>{formErrors}</p>}
-        </form>
+        </form> 
       </div>
     );
 }

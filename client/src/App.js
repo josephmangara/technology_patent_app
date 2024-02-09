@@ -6,6 +6,7 @@ import Login from "./components/Login";
 import Inventors from "./components/Inventors";
 import Footer from "./components/Footer";
 import Signin from "./components/Signin";
+import PatentById from "./components/PatentById";
 
 function App() {
   return (
@@ -16,7 +17,7 @@ function App() {
         <Routes>
           <Route path = '/' element = {<Patent />} />
           <Route path = '/patents' element = {<Patent />} />
-          <Route path = '/patents/<int:id>' element = {<Patent />} />
+          <Route path = '/patents/<int:id>' element = {<PatentById />} />
           <Route path = '/classifications' element = {<Classification />} />
           <Route path = '/classifications/<int:id>' element = {<Classification />} />
           <Route path = '/users' element = {<Login />} />

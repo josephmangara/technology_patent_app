@@ -8,7 +8,6 @@ export default function Classification(){
         fetch('/classifications')
         .then(res => res.json())
         .then(data => {
-            console.log(data)
             setClassification(data)
         })
         .catch(error => {
@@ -17,18 +16,24 @@ export default function Classification(){
     }, [])
   
     return (
-        <div>
-          <h1>classifications List</h1>
-          <ul className="not">
-            {classifications.map((code, id) => (
-            <li key={id} id="display-classes">
-                <h3>{code.class_code}</h3>
-                <h4>Description</h4>
-                <p>{code.description}</p>
-                
-            </li>
-            ))}
-          </ul>
+        <div id="classifications-page">
+          <h4>classifications List</h4>
+          <table>
+            <thead className="table">
+              <tr>
+                <th>Class Code</th>
+                <th>Description</th>
+              </tr>
+            </thead>
+            <tbody className="table">
+              {classifications.map((classification) => (
+                <tr key={classification.id}>
+                  <td>{classification.class_code}</td>
+                  <td>{classification.description}</td>
+                </tr>
+              ))}
+            </tbody>
+          </table>
         </div>
     )
     
