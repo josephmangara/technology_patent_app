@@ -1,13 +1,15 @@
 import React, { useState } from  'react';
 import { Link } from "react-router-dom";
+import { useNavigate } from 'react-router-dom';
 
-export default function Login(){
+export default function Login({setUser}){
     const [email, setEmail] = React.useState("");
     const [password, setPassword] = React.useState("")
     const [formErrors, setFormErrors] = useState([]);
     const [name, setName] = useState("")
     const [affiliation, setAffiliation] = useState("");
     const [accountMessage, setAccountMessage] = React.useState("");
+    const navigate = useNavigate();
 
     function handleName(event) {
         setName(event.target.value)
@@ -39,6 +41,10 @@ export default function Login(){
             r.json().then((new_user)=>{
                 setEmail(new_user.email); 
                 setAccountMessage(`Successfully created an account.`);
+                setUser(new_user.user);
+                setTimeout(() => {
+                    navigate("/");
+                }, 3000);
             });
         } else{
             r.json().then((err) => setFormErrors(err.errors));
@@ -47,10 +53,7 @@ export default function Login(){
     }
 
     return (
-      <div className='login-box' 
-      style={{
-        backgroundImage: `url("https://images.unsplash.com/photo-1609579426324-74a8a0206ce1?q=80&w=774&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D")`
-      }}>
+      <div className='login-box'>
          <Link to="/login">Click Here to Login</Link><hr />
 
         <form id='login-form' onSubmit={handleSubmit}>

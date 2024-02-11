@@ -4,6 +4,7 @@ from flask_sqlalchemy import SQLAlchemy
 from sqlalchemy.orm import validates
 from sqlalchemy.ext.hybrid import hybrid_property
 from flask_bcrypt import Bcrypt 
+from sqlalchemy_serializer import SerializerMixin
 
 db = SQLAlchemy()
 bcrypt = Bcrypt() 
@@ -14,7 +15,7 @@ inventors_patent = db.Table(
     db.Column('inventor_id', db.Integer, db.ForeignKey('inventors.id'), primary_key=True),
 )
 
-class Patent(db.Model):
+class Patent(db.Model, SerializerMixin):
     __tablename__ = 'patents'
 
     id = db.Column(db.Integer, primary_key=True)
@@ -32,7 +33,7 @@ class Patent(db.Model):
     def __repr__(self):
         return f"Patent('{self.title}', '{self.patent_status}')"
     
-class User(db.Model):
+class User(db.Model, SerializerMixin):
     __tablename__ = 'users'
 
     id = db.Column(db.Integer, primary_key=True)
@@ -67,7 +68,7 @@ class User(db.Model):
     def __repr__(self):
         return f"User('{self.name}', '{self.email}')"
 
-class Classification(db.Model):
+class Classification(db.Model, SerializerMixin):
     __tablename__ = 'classifications'
 
     id = db.Column(db.Integer, primary_key=True)
@@ -79,7 +80,7 @@ class Classification(db.Model):
     def __repr__(self):
         return f"Classification('{self.class_code}', '{self.description}')"
 
-class Inventors(db.Model):
+class Inventors(db.Model, SerializerMixin):
     __tablename__ = 'inventors'
 
     id = db.Column(db.Integer, primary_key=True)

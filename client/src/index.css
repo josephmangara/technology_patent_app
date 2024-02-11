@@ -118,6 +118,11 @@ th, td {
   background-color: #f33232; 
   padding: 10px 20px;
 }
-#display-patents {
+/* #display-patents {
   cursor: pointer;
+} */
+#logout-button {
+  background-color: aqua;
+  border: 1px solid #ccc;
+  border-radius: 4px;
 }

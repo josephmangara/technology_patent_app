@@ -1,9 +1,12 @@
 import React from 'react';
+import { useNavigate } from 'react-router-dom';
 
-function Signin() {
+function Signin({setUser}) {
     const [email, setEmail] = React.useState("");
     const [password, setPassword] = React.useState("");
     const [loginMessage, setLoginMessage] = React.useState("");
+
+    const navigate = useNavigate();
 
     function handleSubmit(e) {
         e.preventDefault();
@@ -17,6 +20,10 @@ function Signin() {
             if (r.ok) {
                 r.json().then((data) => {
                     setLoginMessage(`Welcome, ${data.user}!`);
+                    setUser(data.user);
+                    setTimeout(() => {
+                        navigate("/");
+                    }, 3000);
                 });
             } else {
                 setLoginMessage("Invalid email or password");
@@ -28,20 +35,20 @@ function Signin() {
         <>
             <form onSubmit={handleSubmit} id='login-form'>
                 <h4>Login with email and password</h4>
+                <label htmlFor="email">email </label>
                 <input className='login-fields'
                     type="text"
                     id="username"
                     value={email}
                     onChange={(e) => setEmail(e.target.value)}
-                />
-                <label htmlFor="email">email </label><br />
+                /><br />
+                <label htmlFor="password">password </label>
                 <input className='login-fields'
                     type="password" 
                     id="password"
                     value={password}
                     onChange={(e) => setPassword(e.target.value)}
                 />
-                <label htmlFor="password">password </label><br />
                 <button type='submit' id='login-btn'>Log in</button>
                 <hr />
                 {loginMessage && <p>{loginMessage}</p>} 

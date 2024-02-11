@@ -14,9 +14,9 @@ export default function Navbar({ user, setUser }){
         <div id='navbar'>
           <h1 className='heading'>Tech Patent Searching App</h1>
           <div>
-            <Link to="/users">Log in</Link> | <Link to="/patents">patents</Link> | <Link to="/classifications">Classifications</Link> | <Link to="/inventors">Group inventors</Link> 
+            <Link to="/users">Log in</Link> | <Link to="/patents">patents</Link> | <Link to="/classifications">Classifications</Link> | <Link to="/inventors">Group inventors</Link><br /><br /> 
             {user && (
-            <button onClick={handleLogoutClick}>Logout</button>
+            <button onClick={handleLogoutClick} id='logout-button'>Logout</button>
           )}
           </div>
         </div>  

@@ -119,7 +119,7 @@ class PatentById(Resource):
             }
 
             response = make_response(
-                jsonify(response_dict),
+                jsonify([response_dict]),
                 200,
             )
             return response 
@@ -150,7 +150,7 @@ class PatentById(Resource):
             )
         return response 
 
-api.add_resource(PatentById, '/patents/<int:id>')
+api.add_resource(PatentById, '/patents/id')
 
 # Classification
 class Classifications(Resource):
@@ -252,13 +252,12 @@ api.add_resource(Users, '/users')
 
 class CheckSession(Resource):
     def get(self):
-        if 'user_id' in session:
-            user_id = session['user_id']
-            user = User.query.get(user_id)
-            if user:
-                return user.to_dict()
-        abort(204)
-
+        user = User.query.filter(User.id == session.get('user_id')).first()
+        if user:
+            return jsonify(user.to_dict())
+        else:
+            return jsonify({"message": "401: Not authorized"}, 401)
+ 
 api.add_resource(CheckSession, '/check_session', endpoint='check_session')
 
 class Login(Resource):
@@ -286,8 +285,13 @@ api.add_resource(Login, '/login')
 
 class Logout(Resource):
     def delete(self):
-        session.pop('user_id', None)
-        return {}, 204
+        user = User.query.filter(User.id == session.get('user_id')).first()
+        if user:
+            session['user_id'] = None
+            return {'message': '204: No Content'}, 204
+        
+        # session.pop('user_id', None)
+        # return {"message": "sign in"}, 204
 
 api.add_resource(Logout, '/logout', endpoint='logout')
 
