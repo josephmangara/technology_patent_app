@@ -1,5 +1,7 @@
 import React, { useState, useEffect } from "react";
 import { useNavigate } from "react-router-dom";
+import Footer from "./Footer";
+
 
 export default function Patent(){
 const [patents, setPatents] = useState([])
@@ -22,6 +24,7 @@ const handleClick = (id) => {
 }; 
 
 return (
+  <>
     <div id="patents-page">
       {/* <h5>Welcome, {user.name}</h5> */}
       <h2 id="patents">Patents</h2>
@@ -36,5 +39,7 @@ return (
         ))}
       </ol>
     </div>
+    <Footer />
+  </>
 )
 }
