@@ -1,8 +1,8 @@
-"""models
+"""password hashing
 
-Revision ID: 32f63e445c83
+Revision ID: f946a4dcade3
 Revises: 
-Create Date: 2024-02-07 15:44:23.225765
+Create Date: 2024-02-11 17:35:39.968995
 
 """
 from alembic import op
@@ -10,7 +10,7 @@ import sqlalchemy as sa
 
 
 # revision identifiers, used by Alembic.
-revision = '32f63e445c83'
+revision = 'f946a4dcade3'
 down_revision = None
 branch_labels = None
 depends_on = None
@@ -22,7 +22,8 @@ def upgrade():
     sa.Column('id', sa.Integer(), nullable=False),
     sa.Column('class_code', sa.Integer(), nullable=True),
     sa.Column('description', sa.String(), nullable=True),
-    sa.PrimaryKeyConstraint('id')
+    sa.PrimaryKeyConstraint('id'),
+    sa.UniqueConstraint('class_code')
     )
     op.create_table('inventors',
     sa.Column('id', sa.Integer(), nullable=False),
@@ -31,11 +32,13 @@ def upgrade():
     )
     op.create_table('users',
     sa.Column('id', sa.Integer(), nullable=False),
-    sa.Column('name', sa.String(length=250), nullable=False),
+    sa.Column('name', sa.String(length=250), nullable=True),
     sa.Column('affiliation', sa.String(), nullable=True),
     sa.Column('email', sa.String(), nullable=True),
-    sa.Column('password', sa.String(), nullable=True),
-    sa.PrimaryKeyConstraint('id')
+    sa.Column('_password_hash', sa.String(), nullable=False),
+    sa.PrimaryKeyConstraint('id'),
+    sa.UniqueConstraint('email'),
+    sa.UniqueConstraint('name')
     )
     op.create_table('patents',
     sa.Column('id', sa.Integer(), nullable=False),
@@ -48,7 +51,8 @@ def upgrade():
     sa.Column('classification_id', sa.Integer(), nullable=True),
     sa.ForeignKeyConstraint(['classification_id'], ['classifications.id'], ),
     sa.ForeignKeyConstraint(['user_id'], ['users.id'], ),
-    sa.PrimaryKeyConstraint('id')
+    sa.PrimaryKeyConstraint('id'),
+    sa.UniqueConstraint('title')
     )
     op.create_table('inventors_patent',
     sa.Column('patent_id', sa.Integer(), nullable=False),
