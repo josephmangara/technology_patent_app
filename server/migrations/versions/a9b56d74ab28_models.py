@@ -1,8 +1,8 @@
-"""password hashing
+"""models
 
-Revision ID: f946a4dcade3
+Revision ID: a9b56d74ab28
 Revises: 
-Create Date: 2024-02-11 17:35:39.968995
+Create Date: 2024-02-11 23:53:43.161205
 
 """
 from alembic import op
@@ -10,7 +10,7 @@ import sqlalchemy as sa
 
 
 # revision identifiers, used by Alembic.
-revision = 'f946a4dcade3'
+revision = 'a9b56d74ab28'
 down_revision = None
 branch_labels = None
 depends_on = None
