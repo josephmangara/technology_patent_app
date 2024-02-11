@@ -48,23 +48,31 @@ code {
   margin-bottom: 15px; 
   border-radius: 4px;
 }
-
 /* Footer.css */
-
 #footer {
   background-color: #333;
   color: #fff;
   padding: 20px;
   text-align: center;
-  position: fixed;
+  /* position: absolute; */
   bottom: 0;
   left: 0;
+  width: 100%;
 }
-
+/* 
+#footer {
+  background-color: #333;
+  color: #fff;
+  padding: 20px;
+  text-align: center;
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  width: 100%; 
+} */
 #footer-text {
   margin: 0;
 }
-
 .socials {
   
   background-color: #e4eff3;
@@ -75,21 +83,16 @@ code {
   align-items: center;
   justify-content: center;
 }
-
 .socials-links {
   width: 40px;
   height: 40px;
   border-radius: 50%;
   margin: 0 5px;
 }
-
 .socials-links:hover {
   background-color: #ddd;
   transition: background-color 0.3s;
 }
-
-/* Customize the styles as per your design preferences */
-
 
 .table {
   background-color: rgb(249, 252, 214);

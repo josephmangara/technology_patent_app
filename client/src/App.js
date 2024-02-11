@@ -5,7 +5,6 @@ import Patent from './components/Patents';
 import Classification from "./components/Classification";
 import Login from "./components/Login";
 import Inventors from "./components/Inventors";
-import Footer from "./components/Footer";
 import Signin from "./components/Signin";
 import PatentById from "./components/PatentById";
 
@@ -38,8 +37,6 @@ function App() {
           <Route path = '/inventors' element = {<Inventors />} />
         </Routes>
       </main>
-      <hr />
-      <Footer />
     </div>
   );
 }

@@ -50,7 +50,6 @@ function Signin({setUser}) {
                     onChange={(e) => setPassword(e.target.value)}
                 />
                 <button type='submit' id='login-btn'>Log in</button>
-                <hr />
                 {loginMessage && <p>{loginMessage}</p>} 
             </form>
         </>
