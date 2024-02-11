@@ -19,7 +19,7 @@ useEffect(() => {
 
 const handleClick = (id) => {
   navigate(`/patents/${id}`, { replace: true }); 
-};
+}; 
 
 return (
     <div id="patents-page">
