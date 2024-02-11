@@ -1,4 +1,5 @@
 import { Routes, Route } from "react-router-dom";
+import { useState, useEffect } from  'react';
 import Navbar from './components/Navbar';
 import Patent from './components/Patents';
 import Classification from "./components/Classification";
@@ -9,9 +10,21 @@ import Signin from "./components/Signin";
 import PatentById from "./components/PatentById";
 
 function App() {
+
+  const [user, setUser] = useState(null);
+
+  useEffect(() => {
+    // auto-login
+    fetch("/check_session").then((r) => {
+      if (r.ok) {
+        r.json().then((user) => setUser(user));
+      }
+    });
+  }, []);
+
   return (
     <div>
-      <Navbar />
+      <Navbar user={user} setUser={setUser} />
       <hr />
       <main>
         <Routes>
@@ -26,6 +39,7 @@ function App() {
           <Route path = '/inventors' element = {<Inventors />} />
         </Routes>
       </main>
+      <hr />
       <Footer />
     </div>
   );

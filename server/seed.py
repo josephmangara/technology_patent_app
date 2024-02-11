@@ -2,7 +2,9 @@ from random import choice, sample
 import faker
 from models import Classification, User, Inventors, Patent, inventors_patent
 from app import app, db
+from flask_bcrypt import Bcrypt 
 
+bcrypt = Bcrypt() 
 fake = faker.Faker()
 
 with app.app_context():
@@ -17,11 +19,15 @@ with app.app_context():
     affiliations = ["university", "organisation", "individual"]
     names = []
 
-    for _ in range(10):
+    for _ in range(4):
+        fake_password = fake.password()
+        hashed_password = bcrypt.generate_password_hash(fake_password).decode('utf-8') 
+
         fake_name = User(
             name=fake.name(),
             email=fake.email(),
-            affiliation=choice(affiliations)
+            affiliation=choice(affiliations),
+            _password_hash=hashed_password
         )
         db.session.add(fake_name)
         names.append(fake_name)

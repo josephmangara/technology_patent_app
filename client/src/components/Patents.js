@@ -23,6 +23,7 @@ const handleClick = (id) => {
 
 return (
     <div id="patents-page">
+      {/* <h5>Welcome, {user.name}</h5> */}
       <h2 id="patents">Patents</h2>
       <ol className="lists">
         {patents.map((patent, id) => (

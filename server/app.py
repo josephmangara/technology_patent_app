@@ -1,13 +1,15 @@
 #!/usr/bin/env python3
 
-from flask import Flask, make_response, request, jsonify, session 
+from flask import Flask, make_response, request, jsonify, session, abort
 from flask_migrate import Migrate
 from flask_restful import Api, Resource
 from models import db, Patent, Inventors, User, Classification
 
+
 app = Flask(__name__)
 api = Api(app)
 
+app.config['SECRET_KEY'] = '70fb6dad1dc6a3140da2960eb7549c528679435f1d2dba1b2fcdc424f4db7b9e'
 app.config['SQLALCHEMY_DATABASE_URI'] = 'sqlite:///patents.db'
 app.config['SQLALCHEMY_TRACK_MODIFICATIONS'] = False
 app.config['JSONIFY_PRETTYPRINT_REGULAR'] = False
@@ -218,36 +220,46 @@ class Users(Resource):
             password=data.get("password")
 
             if name is None or affiliation is None or email is None or password is None:
-                response_dict = {"message": "Either name, affiliation, email or password field is empty!"}
+                response_dict = {"message": "Missing input field!"}
                 response = make_response(
                     jsonify(response_dict),
-                    404,
+                    400,
                 )
                 return response
             
-            else:
-                new_user = User(
-                    name=name, 
-                    affiliation=affiliation, 
-                    email=email, 
-                    password=password, 
-                    )
-                db.session.add(new_user)
-                db.session.commit()
-
-                response = make_response(
-                    jsonify({"message": "successful"}),
-                    201,
+            new_user = User(
+                name=name, 
+                affiliation=affiliation, 
+                email=email, 
+                password_hash=password, 
                 )
+            db.session.add(new_user)
+            db.session.commit()
+
+            response = make_response(
+                jsonify({"message": "User created successfully"}),
+                201,
+            )
             return response 
         
-        except:
-            err_dict= {"errors": "Either name, affiliation,email or password field is empty"}
+        except Exception as e:
+            err_dict= {"errors": "Missing input field!"}
             response = make_response(err_dict, 404)
             db.session.rollback()
             return response 
     
 api.add_resource(Users, '/users')
+
+class CheckSession(Resource):
+    def get(self):
+        if 'user_id' in session:
+            user_id = session['user_id']
+            user = User.query.get(user_id)
+            if user:
+                return user.to_dict()
+        abort(204)
+
+api.add_resource(CheckSession, '/check_session', endpoint='check_session')
 
 class Login(Resource):
     def post(self):
@@ -258,14 +270,26 @@ class Login(Resource):
         email = request_data['email']
         user = User.query.filter_by(email=email).first()
 
-        if user:
-            session['user_id'] = user.id
-            return {"user": user.email}, 200
+        password = request_data['password']
+        if user.authenticate(password):
+                session['user_id'] = user.id
+                return {"user": user.name}, 200
 
         else:
-            return jsonify({"message": "User not found"}), 404
+            response = make_response(
+                jsonify({"message": "Invalid username or password!"}),
+                401,
+            )
+            return response
 
 api.add_resource(Login, '/login')
+
+class Logout(Resource):
+    def delete(self):
+        session.pop('user_id', None)
+        return {}, 204
+
+api.add_resource(Logout, '/logout', endpoint='logout')
 
 #users by Id
 class UsersById(Resource):
