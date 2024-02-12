@@ -53,6 +53,7 @@ export default function Login({setUser}){
     }
 
     return (
+    <>
       <div className='login-box'>
          <Link to="/login">Click Here to Login</Link><hr />
 
@@ -72,7 +73,9 @@ export default function Login({setUser}){
             <button type="submit" className='input'>Create Account</button>
             {accountMessage && <p>{accountMessage}</p>} 
             {formErrors && <p>{formErrors}</p>}
-        </form> 
+        </form>
       </div>
+      <hr />
+    </>
     );
 }

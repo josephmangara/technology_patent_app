@@ -17,13 +17,13 @@ export default function Inventors() {
   }, [])
 
 return (
-  <div>
-    <h1>List of patents belonging to multiple inventors.</h1>
+  <div id="inventors-page">
+    <h1 id="heading">List of patents belonging to multiple inventors.</h1>
     <ul className="lists">
       {inventors.map((inv, id) => (
         <li key={id} id="display-inventors">
           <h3>{inv.group_name}</h3>
-          <img src={inv.group_image} alt="inventions" />
+          <img src={inv.group_image} alt="inventions" id='pictures'/>
           <h4>Patents:</h4>
           <ul>
             {inv.patents.map((patent, index) => (
