@@ -162,7 +162,36 @@ th, td {
 }
 .lists {
   list-style: none;
+  display: flex;
+  flex-wrap: wrap;
+  border: 5px rgb(224, 247, 247);
+  padding: 10px; 
+  /* background-color: #f33232; */
 }
 #patent-details {
   margin-left: 5%;
+}
+#display-inventors {
+  width: calc(90% / 3);
+  padding: 10px;
+  box-sizing: border-box; 
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+  margin-bottom:10px;
+}
+@media screen and (max-width: 768px) {
+  #display-inventors {
+    width: calc(100% / 2);
+  }
+}
+@media screen and (max-width: 480px) {
+  #display-inventors {
+    width: 100%;
+  }
+}
+#pictures {
+  width: 250px;
+  height: 300px;
+}
+#inventors-page {
+  margin-left: 4%;
 }

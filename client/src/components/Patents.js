@@ -28,13 +28,13 @@ return (
     <div id="patents-page">
       {/* <h5>Welcome, {user.name}</h5> */}
       <h2 id="patents">Patents</h2>
-      <ol className="lists">
+      <ol id="lists">
         {patents.map((patent, id) => (
         <li key={id} id="display-patents" onClick={() => handleClick(patent.id)}>
-            <h4>{patent.title}</h4>
-            <h5>Summary</h5>
-            <p>{patent.summary}</p>
-            <p>Patent Status: {patent.patent_status}</p>
+          <h4>{patent.title}</h4>
+          <h5>Summary</h5>
+          <p>{patent.summary}</p>
+          <p>Patent Status: {patent.patent_status}</p>
         </li>
         ))}
       </ol>
