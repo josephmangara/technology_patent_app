@@ -85,9 +85,11 @@ class Inventors(db.Model, SerializerMixin):
 
     id = db.Column(db.Integer, primary_key=True)
     group_name = db.Column(db.String(250), nullable=False)
+    group_image = db.Column(db.String)
 
     patents = db.relationship('Patent', secondary=inventors_patent, back_populates="inventors")
 
     def __repr__(self):
         return f"Inventors('{self.group_name}')"
        
+
