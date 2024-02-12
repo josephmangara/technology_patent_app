@@ -57,7 +57,7 @@ code {
   /* position: absolute; */
   bottom: 0;
   left: 0;
-  width: 100%;
+  max-width: 100%;
 }
 /* 
 #footer {
@@ -150,12 +150,19 @@ th, td {
   background-color: #f33232; 
   padding: 10px 20px;
   font-family: sans-serif;
+  max-width: 100%;
 }
-/* #display-patents {
+#display-patents {
   cursor: pointer;
-} */
+}
 #logout-button {
   background-color: aqua;
   border: 1px solid #ccc;
   border-radius: 4px;
+}
+.lists {
+  list-style: none;
+}
+#patent-details {
+  margin-left: 5%;
 }

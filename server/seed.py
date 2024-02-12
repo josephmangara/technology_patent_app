@@ -112,11 +112,33 @@ with app.app_context():
     db.session.commit()
 
     # Inventors
+    images = [
+            "https://i.pinimg.com/236x/88/e5/f1/88e5f18fae15a003b7ec5e76f6b186eb.jpg",
+            "https://i.pinimg.com/236x/e6/dc/5c/e6dc5c3772b07c0c2a5cb5a64940a1ed.jpg",
+            "https://i.pinimg.com/236x/79/af/43/79af432e40034b8c32194cbc4d74962d.jpg",
+            "https://i.pinimg.com/236x/b3/6e/e4/b36ee41cce0cf150bfa97bf4b8feaad8.jpg",
+            "https://i.pinimg.com/236x/b2/b2/7c/b2b27c69409c2f8779b9a5a5ac28521f.jpg",
+            "https://i.pinimg.com/236x/a1/84/48/a1844838cb4c2f63facb1c1b14975a89.jpg",
+            "https://i.pinimg.com/236x/d1/ab/dd/d1abdd9a052946b94bf8feb6115540aa.jpg",
+            "https://i.pinimg.com/236x/df/4e/f6/df4ef6146bfde94dd90ebe7ec6c67a07.jpg"
+        ]
+    innovators_names = [
+            "TechGen Innovations",
+            "Code craft ",
+            "Silicon",
+            "CyberVision group",
+            "DataSphere Innovators",
+            "NanoTech Nexus",
+            "Quantum Innovations ll",
+            "AI Ventures"
+        ]
+
     group_names = []
 
-    for _ in range (8):
+    for i in range (8):
         fake_group = Inventors(
-            group_name=fake.sentence(nb_words=2)
+            group_name=innovators_names[i],
+            group_image=images[i]
         )
         
         db.session.add(fake_group)

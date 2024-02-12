@@ -2,11 +2,11 @@ import React, { useState, useEffect } from "react";
 import { useParams } from "react-router-dom";
 
 export default function PatentById() {
-    const [patent, setPatent] = useState([]);
+    const [patent, setPatent] = useState(null);
     const { id } = useParams(); 
 
     useEffect(() => {
-        fetch("/patents/1")
+        fetch(`/patents/${id}`) 
         .then(res => {
             if (!res.ok) {
                 throw new Error('Network response was not ok');
@@ -15,30 +15,27 @@ export default function PatentById() {
         })
             .then(data => {
                 console.log(data);
-                setPatent(data);
+                setPatent(data[0]);  
             })
             .catch(error => {
                 console.error('Error fetching patent:', error);
             });
     }, [id]); 
+
     if (!patent) {
         return <div>Loading...</div>;
     }
 
     return (
         <div id="patent-details">
-           {patent.map(patent => (
-                <div key={patent.id}>
-                    <h2>{patent.title}</h2>
-                    <p><strong>Patent Status:</strong> {patent.patent_status}</p>
-                    <h3>Summary</h3>
-                    <p>{patent.summary}</p>
-                    <h3>Classification</h3>
-                    <p>{patent.classification.description}</p>
-                    <h3>Patent Creator</h3>
-                    <p>{patent.patent_creator.name}</p>
-                </div>
-            ))}
+            <h2>{patent.title}</h2>
+            <h3>Summary</h3>
+            <p>{patent.summary}</p>
+            <h4>Classification</h4>
+            <p>{patent.classification.description}</p>
+            <h4>Patent Creator</h4>
+            <p>{patent.patent_creator.name}</p>
+            <p><strong>Patent Status:</strong> {patent.patent_status}</p>
         </div>
     );
 }

@@ -4,7 +4,7 @@ from flask import Flask, make_response, request, jsonify, session, abort
 from flask_migrate import Migrate
 from flask_restful import Api, Resource
 from models import db, Patent, Inventors, User, Classification
-
+import random
 
 app = Flask(__name__)
 api = Api(app)
@@ -150,7 +150,7 @@ class PatentById(Resource):
             )
         return response 
 
-api.add_resource(PatentById, '/patents/id')
+api.add_resource(PatentById, '/patents/<int:id>')
 
 # Classification
 class Classifications(Resource):
@@ -360,8 +360,16 @@ class InventorSi(Resource):
         for inventor in Inventors.query.all():
             inventor_dict = {
                 'id': inventor.id,
-                'group_name': inventor.group_name
-                }
+                'group_name': inventor.group_name,
+                'group_image': inventor.group_image,
+                'patents': [{
+                    'id': patent.id,
+                    'title': patent.title,
+                    'summary': patent.summary,
+                    'patent_status': patent.patent_status
+                } for patent in inventor.patents]
+            }
+            
             inventors.append(inventor_dict)
         response = make_response(
             jsonify(inventors),
@@ -375,30 +383,25 @@ api.add_resource(InventorSi, '/inventors')
 class InventorsById(Resource):
     def get(self, id):
         inventors = Inventors.query.filter_by(id=id).first()
-        patents = Patent.query.all()
-        patents_list = []
         
-        for inventors_patent in patents:
-            patent_dict = {
-                        "id": inventors_patent.id,
-                        "title": inventors_patent.title,
-                        "summary": inventors_patent.summary,
-                        "patent_status": inventors_patent.patent_status
-                    } 
-            patents_list.append(patent_dict)
-
         if inventors:
+            patents = inventors.patents 
+
+            selected_patents = random.sample(patents, min(len(patents), 3)) 
+        
             response_dict = {
                 'id': inventors.id,
                 'group_name': inventors.group_name,
-                "patents": patents_list
+                'patents': [{
+                    'id': patent.id,
+                    'title': patent.title,
+                    'summary': patent.summary,
+                    'patent_status': patent.patent_status
+                } for patent in selected_patents]
             }
-            response = make_response(
-                jsonify(response_dict),
-                200,
-            )
+            
+            response = make_response(jsonify([response_dict]), 200)
             return response
-        
         else:
             response = make_response(
                 jsonify({"error": "Inventors not found!"}),
