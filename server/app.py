@@ -5,18 +5,24 @@ import os
 from dotenv import load_dotenv
 load_dotenv()
 
-from flask import Flask, make_response, request, jsonify, session, abort
+from flask import Flask, make_response, request, jsonify, session, abort, render_template
 from flask_migrate import Migrate
 from flask_restful import Api, Resource
 from models import db, Patent, Inventors, User, Classification
 import random
 
-app = Flask(__name__)
+app = Flask(
+    __name__,
+    static_url_path='',
+    static_folder='../client/build',
+    template_folder='../client/build'
+)
+
 api = Api(app)
 
 app.config['SECRET_KEY'] = '70fb6dad1dc6a3140da2960eb7549c528679435f1d2dba1b2fcdc424f4db7b9e'
 
-app.config['SQLALCHEMY_DATABASE_URI'] = os.environ.get('DATABASE_URI')
+app.config['SQLALCHEMY_DATABASE_URI'] = os.environ.get('DATABASE_URI', 'postgresql://mangara:PF2l9sqRzNqGZfdYfR9ogbI2LML09tPh@dpg-cn5ibbect0pc738g35kg-a.frankfurt-postgres.render.com/technonology_patents_ohqj')
 app.config['SQLALCHEMY_TRACK_MODIFICATIONS'] = False
 app.config['JSONIFY_PRETTYPRINT_REGULAR'] = False
 
@@ -25,6 +31,11 @@ app.json.compact = True
 migrate = Migrate(app, db)
 
 db.init_app(app)
+
+@app.route('/')
+@app.route('/<int:id>')
+def index(id=0):
+    return render_template("index.html")
 
 class Home(Resource):
     def get(self):
