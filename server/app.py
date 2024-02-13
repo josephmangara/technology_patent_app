@@ -5,7 +5,6 @@ import os
 from dotenv import load_dotenv
 load_dotenv()
 
-
 from flask import Flask, make_response, request, jsonify, session, abort
 from flask_migrate import Migrate
 from flask_restful import Api, Resource
