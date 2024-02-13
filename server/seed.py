@@ -46,7 +46,7 @@ with app.app_context():
     classifications = []
 
     for i, subfield in enumerate(technology_subfields, start=1):
-        class_code = f"A{i:03d}"
+        class_code = f"{i}"
         classification = Classification(
             class_code=class_code,
             description=subfield

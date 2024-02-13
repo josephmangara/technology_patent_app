@@ -1,7 +1,0 @@
-notify on successful sign in.
-validations.
-onClick functions- patents, inventors
-
-
-show password
-patents/id
