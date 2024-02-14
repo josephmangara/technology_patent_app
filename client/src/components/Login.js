@@ -75,7 +75,7 @@ export default function Login({setUser}){
             {formErrors && <p>{formErrors}</p>}
         </form>
       </div>
-      <hr />
+      <br />
     </>
     );
 }
