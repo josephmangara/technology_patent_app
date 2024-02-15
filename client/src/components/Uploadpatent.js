@@ -56,17 +56,18 @@ export default function Uploadpatent(){
     }
 
 return (
-    <div>
-      {/* <p>Sign in to upload</p> */}
+    <div id="upload-page">
+     
       <form onSubmit={handleSubmit} id="upload">
       <label>Title</label><br />
         <input 
             type="text"
+            className="upload-select"
             onChange={handleTitle}
             value={title}
             placeholder="title" /><br />
         <label>Classification</label><br />
-        <select onChange={handleClassification} value={classification_id} placeholder='classification' >
+        <select className="upload-select" onChange={handleClassification} value={classification_id} placeholder='classification' >
             <option value="1">Machine Learning Algorithms</option>
             <option value="2">Blockchain Technology</option>
             <option value="3">Nanotechnology</option>
@@ -77,11 +78,12 @@ return (
         <label>Summary</label><br />
         <input 
             type="text"
+            className="upload-select"
             onChange={handleSummary}
             value={summary}
             placeholder="summary" /><br />
         <label>Status</label><br />
-        <select onChange={handleStatus} value={patent_status} placeholder='status' >
+        <select className="upload-select" onChange={handleStatus} value={patent_status} placeholder='status' >
             <option value="granted">granted</option>
             <option value="pending">pending</option>
             <option value="expired">expired</option>
