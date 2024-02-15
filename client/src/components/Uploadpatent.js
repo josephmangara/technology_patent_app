@@ -11,8 +11,7 @@ export default function Uploadpatent(){
 
     function handleTitle(event) {
         setTitle(event.target.value)
-    }
-
+    }   
     function handleSummary(event) {
         setSummary(event.target.value)
     }
@@ -68,7 +67,7 @@ return (
             placeholder="title" /><br />
         <label>Classification</label><br />
         <select className="upload-select" onChange={handleClassification} value={classification_id} placeholder='classification' >
-            <option value="1">Machine Learning Algorithms</option>
+            <option value="1">Machine Learning algorithms</option>
             <option value="2">Blockchain Technology</option>
             <option value="3">Nanotechnology</option>
             <option value="4">Augmented Reality Applications</option>
