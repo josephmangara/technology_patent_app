@@ -17,7 +17,6 @@ app = Flask(
     static_folder='../client/build',
     template_folder='../client/build'
 )
-
 api = Api(app)
 
 app.config['SECRET_KEY'] = '70fb6dad1dc6a3140da2960eb7549c528679435f1d2dba1b2fcdc424f4db7b9e'
@@ -25,6 +24,7 @@ app.config['SECRET_KEY'] = '70fb6dad1dc6a3140da2960eb7549c528679435f1d2dba1b2fcd
 app.config['SQLALCHEMY_DATABASE_URI'] = os.environ.get('DATABASE_URI', 'postgresql://mangara:PF2l9sqRzNqGZfdYfR9ogbI2LML09tPh@dpg-cn5ibbect0pc738g35kg-a.frankfurt-postgres.render.com/technonology_patents_ohqj')
 app.config['SQLALCHEMY_TRACK_MODIFICATIONS'] = False
 app.config['JSONIFY_PRETTYPRINT_REGULAR'] = False
+app.config['SESSION_TYPE'] = 'SQLAlchemy'
 
 app.json.compact = True 
 
@@ -42,6 +42,7 @@ class Home(Resource):
         return jsonify({"message":  "Welcome to the patent technology API."})
     
 api.add_resource(Home, '/')
+
 # Patent views 
 class Patents(Resource):
     def get(self):
@@ -70,7 +71,7 @@ class Patents(Resource):
             title=data.get("title") 
             patent_status=data.get("patent_status") 
             summary=data.get("summary") 
-            user_id=data.get("user_id")
+            # user_id=data.get("user_id")
             classification_id=data.get("classification_id")
 
             # patent = Patent.query.filter_by(id=id).first()
@@ -87,7 +88,6 @@ class Patents(Resource):
                     title=title, 
                     patent_status=patent_status, 
                     summary=summary, 
-                    user_id=user_id, 
                     classification_id=classification_id,
                     )
                 db.session.add(new_patent)
@@ -100,7 +100,7 @@ class Patents(Resource):
             return response 
         
         except:
-            err_dict= {"errors": "validation errors"}
+            err_dict= {"errors": "Missing input field!"}
             response = make_response(err_dict, 404)
             db.session.rollback()
             return response 
@@ -306,9 +306,6 @@ class Logout(Resource):
         if user:
             session['user_id'] = None
             return {'message': '204: No Content'}, 204
-        
-        # session.pop('user_id', None)
-        # return {"message": "sign in"}, 204
 
 api.add_resource(Logout, '/logout', endpoint='logout')
 
