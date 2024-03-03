@@ -107,10 +107,6 @@ th, td {
   font-size: 28px;
 
 }
-#patents-page {
-  max-width: 70%;
-  margin-left: 30px;
-}
 #classifications-page {
   margin:auto;
   width: 90%;
@@ -147,9 +143,9 @@ th, td {
   cursor: pointer;
 }
 #navbar {
-  /* background-color: #f7a5a5;  */
+  background-color: #1a329c; 
   /* background-image: url(https://images.unsplash.com/photo-1556283253-1e48b95dc3c7?w=700&auto=format&fit=crop&q=60&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxleHBsb3JlLWZlZWR8M3x8fGVufDB8fHx8fA%3D%3D); */
-  padding: 10px 20px;
+  padding: 10px 10px;
   font-family: sans-serif;
   max-width: 100%;
 }
@@ -157,11 +153,14 @@ th, td {
   cursor: pointer;
 }
 #logout-button {
-  background-color: #0f6dd1;
+  /* background-color: #404244f3;
   border: 1px solid #ccc;
-  border-radius: 4px;
+  border-radius: 3px; */
   color: white;
-  width: 60px;
+  width: 50px;
+  height: 20px;
+  font-size: x-small;
+  margin-right: 0;
 }
 .lists {
   list-style: none;
@@ -244,4 +243,54 @@ th, td {
 }
 .upload-btn:hover {
   background-color: #45a049;
+}
+.navigation-links {
+  color: #333;
+  font-family: Arial, Helvetica, sans-serif;
+  display: flex;
+  justify-content: space-between;
+}
+#patent-def {
+  font-family: Arial, Helvetica, sans-serif;
+  font-size: x-small;
+  
+}
+#right-col {
+  border-radius: 3px;
+  border: 1px solid black;
+  flex: 1;
+  padding-left: 10px;
+  width: 30%;
+}
+#page-look {
+  display: flex;
+  flex-direction: row;
+  flex-wrap: wrap;
+}
+#image {
+  width: 94%;
+}
+#patents-page {
+  flex: 1; 
+  padding-right: 10px;
+  /* width: 95%; */
+}
+/* #patents-page {
+  max-width: 70%;
+  margin-left: 30px;
+} */
+.heading {
+  font-family: Arial, Helvetica, sans-serif;
+  font-size: large;
+  color: #ccc;
+}
+.links {
+  padding-right: 10px;
+  color: #ccc;
+  text-decoration: none;
+  font-size: xx-small;
+}
+.small-text {
+  font-size: 12px; 
+  color: #ccc; 
 }
