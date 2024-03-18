@@ -39,7 +39,7 @@ export default function Patent() {
   }; 
 
   return (
-    <>
+    <div className="bg-slate-200">
       <div id="search">      
         <input
           id="search-bar"
@@ -52,16 +52,18 @@ export default function Patent() {
       <div className="page-look">
       <div id="patents-page" className="col-md-6">
         <h2 id="patents">Patents</h2>
-        <ol id="lists">
-          {searchResults.map((patent, id) => (
-            <li key={id} id="display-patents" onClick={() => handleClick(patent.id)}>
-              <h4>{patent.title}</h4>
-              <h5>Summary</h5>
-              <p>{patent.summary}</p>
-              <p>Patent Status: {patent.patent_status}</p>
-            </li>
-          ))}
-        </ol>
+        {searchResults.length > 0 && (
+          <ol id="lists">
+            {searchResults.map((patent, id) => (
+              <li key={id} id="display-patents" onClick={() => handleClick(patent.id)}>
+                <h4>{patent.title}</h4>
+                <h5>Summary</h5>
+                <p>{patent.summary}</p>
+                <p>Patent Status: {patent.patent_status}</p>
+              </li>
+            ))}
+          </ol>
+        )}
       </div>
         <div id="right-col" className="col-md-6">
           <h3>What is a patent?</h3>
@@ -73,6 +75,6 @@ export default function Patent() {
         </div>
       </div>
       <Footer />
-    </>
+    </div>
   );
 }
