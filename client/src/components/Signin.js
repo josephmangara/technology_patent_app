@@ -10,7 +10,7 @@ function Signin({setUser}) {
 
     function handleSubmit(e) {
         e.preventDefault();
-        fetch("/login", {
+        fetch("https://technology-patent-app.onrender.com/login", {
             method: "POST",
             headers: {
                 "Content-Type": "application/json",
