@@ -32,7 +32,7 @@ export default function NavigationBar({ user, setUser }){
     //     </div>  
     // )
     return(
-      <Navbar collapseOnSelect expand="lg" bg="dark" variant="dark" id='navbar'>
+      <Navbar collapseOnSelect expand="lg" bg="dark" variant="dark" id='navbar' className=''>
         <Navbar.Brand href="#home">
           <img 
             src="https://images.unsplash.com/photo-1662481280441-d02db27f5a6a?w=500&auto=format&fit=crop&q=60&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwcm9maWxlLXBhZ2V8NzJ8fHxlbnwwfHx8fHw%3D" 

@@ -8,7 +8,6 @@ export default function Inventors() {
     fetch('/inventors')
     .then(res => res.json())
     .then(data => {
-        console.log(data)
         setInventors(data)
     })
     .catch(error => {
@@ -17,7 +16,7 @@ export default function Inventors() {
   }, [])
 
 return (
-  <div id="inventors-page">
+  <div id="inventors-page" style={{marginTop: "30px"}}>
     <h1 id="heading">List of patents belonging to multiple inventors.</h1>
     <ul className="lists">
       {inventors.map((inv, id) => (
