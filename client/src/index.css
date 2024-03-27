@@ -20,7 +20,7 @@ code {
 }
 .login-box {
   /* background-color: aqua; */
-  max-width: 400px;
+  max-width: 70%;
   padding: 20px;
   border-radius: 8px;
   box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
@@ -223,9 +223,14 @@ th, td {
 
 #upload-page {
   max-width: 400px;
+  border: 1px solid black;
+  box-shadow: #333;
+  border-radius: 8px;
   margin: 0 auto;
 }
-
+#upload {
+  padding: 20px;
+}
 .upload-select,
 .upload-btn {
   width: 100%;
@@ -252,15 +257,13 @@ th, td {
 }
 #patent-def {
   font-family: Arial, Helvetica, sans-serif;
-  font-size: x-small;
-  
 }
 #right-col {
   border-radius: 3px;
   border: 1px solid black;
-  flex: 1;
+  /* flex: 1;
   padding-left: 10px;
-  width: 30%;
+  width: 30%; */
 }
 #page-look {
   display: flex;
@@ -271,8 +274,9 @@ th, td {
   width: 94%;
 }
 #patents-page {
-  flex: 1; 
-  padding-right: 10px;
+  background-color: #f7f1f1;
+  /* flex: 1;  */
+  /* padding-right: 10px; */
   /* width: 95%; */
 }
 /* #patents-page {
