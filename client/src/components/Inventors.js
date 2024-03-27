@@ -5,7 +5,7 @@ export default function Inventors() {
   const [inventors, setInventors] = useState([])
 
   useEffect(() => {
-    fetch('https://technology-patent-app.onrender.com/inventors')
+    fetch('/inventors')
     .then(res => res.json())
     .then(data => {
         setInventors(data)

@@ -10,7 +10,7 @@ export default function Patent() {
   const navigate = useNavigate();
 
   useEffect(() => {
-    fetch('https://technology-patent-app.onrender.com/patents')
+    fetch('/patents')
       .then(res => res.json())
       .then(data => {
         setPatents(data);
