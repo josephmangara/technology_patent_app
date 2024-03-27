@@ -6,7 +6,7 @@ export default function PatentById() {
     const { id } = useParams(); 
 
     useEffect(() => {
-        fetch(`/patents/${id}`) 
+        fetch(`https://technology-patent-app.onrender.com/patents/${id}`) 
         .then(res => {
             if (!res.ok) {
                 throw new Error('Network response was not ok');
