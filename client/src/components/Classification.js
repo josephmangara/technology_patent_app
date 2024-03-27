@@ -5,7 +5,7 @@ export default function Classification(){
     const [classifications, setClassification] = useState([])
 
     useEffect(() => {
-        fetch('https://technology-patent-app.onrender.com/classifications')
+        fetch('/classifications')
         .then(res => res.json())
         .then(data => {
             setClassification(data)

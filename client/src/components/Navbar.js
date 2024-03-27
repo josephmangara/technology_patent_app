@@ -4,7 +4,7 @@ import { Navbar, Nav } from 'react-bootstrap';
 export default function NavigationBar({ user, setUser }){
 
   function handleLogoutClick() {
-    fetch("https://technology-patent-app.onrender.com/logout", { 
+    fetch("/logout", { 
       method: "DELETE",
      }).then((r) => {
       if (r.ok) {

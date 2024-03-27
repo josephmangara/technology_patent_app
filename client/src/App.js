@@ -15,7 +15,7 @@ function App() {
 
   useEffect(() => {
     // auto-login
-    fetch("https://technology-patent-app.onrender.com/check_session").then((r) => {
+    fetch("/check_session").then((r) => {
       if (r.ok) {
         r.json().then((user) => setUser(user));
       }

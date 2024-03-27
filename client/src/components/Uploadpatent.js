@@ -27,7 +27,7 @@ export default function Uploadpatent(){
     function handleSubmit(event){
         event.preventDefault();
         const formData = { title:title, patent_status:patent_status, summary:summary, classification_id:classification_id };
-        fetch('https://technology-patent-app.onrender.com/patents', {
+        fetch('/patents', {
             method: "POST",
             headers: {
                 "Content-Type": "application/json"

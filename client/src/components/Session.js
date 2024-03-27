@@ -4,7 +4,7 @@ function Session() {
     const [user, setUser] = useState(null);
   
     useEffect(() => {
-      fetch("https://technology-patent-app.onrender.com/check_session").then((response) => {
+      fetch("/check_session").then((response) => {
         if (response.ok) {
           response.json().then((user) => setUser(user));
         }

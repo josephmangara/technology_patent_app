@@ -31,7 +31,7 @@ export default function Login({setUser}){
     function handleSubmit(event) {
       event.preventDefault();
       const formData = { email: email, password: password, affiliation:affiliation, name:name };
-      fetch("https://technology-patent-app.onrender.com/users", {
+      fetch("/users", {
         method: "POST",
         headers: {
             "Content-Type": "application/json"
