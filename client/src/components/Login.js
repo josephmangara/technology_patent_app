@@ -11,7 +11,6 @@ export default function Login({setUser}){
     const [affiliation, setAffiliation] = useState("");
     const [accountMessage, setAccountMessage] = React.useState("");
     const navigate = useNavigate();
-    // const { swal, ...rest } = props;
 
     function handleName(event) {
         setName(event.target.value)
