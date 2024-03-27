@@ -14,7 +14,6 @@ export default function PatentById() {
             return res.json();
         })
             .then(data => {
-                console.log(data);
                 setPatent(data[0]);  
             })
             .catch(error => {
@@ -27,7 +26,7 @@ export default function PatentById() {
     }
 
     return (
-        <div id="patent-details">
+        <div id="patent-details" style={{marginTop: "30px"}}>
             <h2>{patent.title}</h2>
             <h3>Summary</h3>
             <p>{patent.summary}</p>

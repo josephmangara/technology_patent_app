@@ -50,9 +50,12 @@ export default function Login({setUser}){
                     icon: 'success',
                 });
                 setTimeout(() => {
-                    navigate("/login");
+
+                    navigate("/");
                 }, 1000);
-            });
+           });
+
+
         } else{
             r.json().then((err) => setFormErrors(err.errors));
         }

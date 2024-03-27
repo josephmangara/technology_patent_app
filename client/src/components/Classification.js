@@ -16,7 +16,7 @@ export default function Classification(){
     }, [])
   
     return (
-        <div id="classifications-page">
+        <div id="classifications-page" style={{marginTop: "30px"}}>
           <h4>classifications List</h4>
           <table>
             <thead className="table">

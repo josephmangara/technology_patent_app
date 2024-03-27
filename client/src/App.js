@@ -1,6 +1,6 @@
 import { Routes, Route } from "react-router-dom";
 import { useState, useEffect } from  'react';
-import Navbar from './components/Navbar';
+import NavigationBar from './components/Navbar';
 import Patent from './components/Patents';
 import Classification from "./components/Classification";
 import Login from "./components/Login";
@@ -24,8 +24,8 @@ function App() {
 
   return (
     <div>
-      <Navbar user={user} setUser={setUser} />
-      <hr />
+      <NavigationBar user={user} setUser={setUser} />
+      
       <main>
         <Routes>
           <Route path = '/' element = {<Patent />} />
