@@ -1,6 +1,7 @@
 import React, { useState } from  'react';
 import { Link } from "react-router-dom";
 import { useNavigate } from 'react-router-dom';
+import Swal from 'sweetalert2'
 
 export default function Login({setUser}){
     const [email, setEmail] = React.useState("");
@@ -10,6 +11,7 @@ export default function Login({setUser}){
     const [affiliation, setAffiliation] = useState("");
     const [accountMessage, setAccountMessage] = React.useState("");
     const navigate = useNavigate();
+    // const { swal, ...rest } = props;
 
     function handleName(event) {
         setName(event.target.value)
@@ -42,10 +44,18 @@ export default function Login({setUser}){
                 setEmail(new_user.email); 
                 setAccountMessage(`Successfully created an account.`);
                 setUser(new_user.user);
+                Swal.fire({
+                    title: 'success',
+                    text: 'Account created',
+                    icon: 'success',
+                });
                 setTimeout(() => {
+
                     navigate("/");
                 }, 1000);
            });
+
+
         } else{
             r.json().then((err) => setFormErrors(err.errors));
         }
