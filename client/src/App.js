@@ -25,7 +25,7 @@ function App() {
   return (
     <div>
       <NavigationBar user={user} setUser={setUser} />
-      <hr />
+      
       <main>
         <Routes>
           <Route path = '/' element = {<Patent />} />

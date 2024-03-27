@@ -37,7 +37,7 @@ export default function Uploadpatent(){
         }).then((response) => {
             if (response.ok) {
                 return response.json().then((new_patent) => {
-                    console.log(new_patent);
+                   
                     setTitle(new_patent.title);
                     setUploadMessage(`Successfully uploaded a patent.`);
                 });
@@ -56,7 +56,7 @@ export default function Uploadpatent(){
     }
 
 return (
-    <div id="upload-page">
+    <div id="upload-page" style={{marginTop: "30px"}}>
      
       <form onSubmit={handleSubmit} id="upload">
       <label>Title</label><br />
