@@ -1,6 +1,5 @@
 import { Link } from 'react-router-dom';
 import { Navbar, Nav } from 'react-bootstrap';
-import './NavigationBar.css';
 
 export default function NavigationBar({ user, setUser }){
 
