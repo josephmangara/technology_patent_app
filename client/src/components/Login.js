@@ -44,7 +44,7 @@ export default function Login({setUser}){
                 setUser(new_user.user);
                 setTimeout(() => {
                     navigate("/");
-                }, 3000);
+                }, 1000);
            });
         } else{
             r.json().then((err) => setFormErrors(err.errors));
