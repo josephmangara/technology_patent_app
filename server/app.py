@@ -42,7 +42,7 @@ class Home(Resource):
     
 api.add_resource(Home, '/')
 
-# Patent views 
+# Patent views   
 class Patents(Resource):
     def get(self):
         patents = []
