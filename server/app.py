@@ -31,7 +31,7 @@ migrate = Migrate(app, db)
 
 db.init_app(app)
 
-@app.route('/')
+# @app.route('/')
 @app.route('/<int:id>')
 def index(id=0):
     return render_template("index.html")
@@ -40,7 +40,7 @@ class Home(Resource):
     def get(self):
         return jsonify({"message":  "Welcome to the patent technology API."})
     
-api.add_resource(Home, '/')
+api.add_resource(Home, '/home')
 
 # Patent views   
 class Patents(Resource):
