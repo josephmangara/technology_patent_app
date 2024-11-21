@@ -47,11 +47,11 @@ export default function NavigationBar({ user, setUser }){
         <Navbar.Toggle aria-controls="responsive-navbar-nav" />
         <Navbar.Collapse id="responsive-navbar-nav" classname='navigation-links'>
           <Nav className="mr-auto">
-            <Nav.Link as={Link} to="/patents" className="links">Patents</Nav.Link>
-            <Nav.Link as={Link} to="/classifications" className="links">Classifications</Nav.Link>
-            <Nav.Link as={Link} to="/inventors" className="links">Group inventors</Nav.Link>
-            <Nav.Link as={Link} to="/uploadpatents" className="links">Upload patent</Nav.Link>
-            <Nav.Link as={Link} to="/users" className="links">Log in</Nav.Link>
+            <Nav.Link as={Link} to="/patents-list" className="links">Patents</Nav.Link>
+            <Nav.Link as={Link} to="/patent-classifications" className="links">Classifications</Nav.Link>
+            <Nav.Link as={Link} to="/inventors-list" className="links">Group inventors</Nav.Link>
+            <Nav.Link as={Link} to="/uploadpatents-post" className="links">Upload patent</Nav.Link>
+            <Nav.Link as={Link} to="/users-auth" className="links">Log in</Nav.Link>
           </Nav>
           {user && (
             <Nav>

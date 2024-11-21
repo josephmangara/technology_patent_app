@@ -64,7 +64,7 @@ export default function Login({setUser}){
     return (
     <>
       <div className='login-box'>
-         <Link to="/login">Click Here to Login</Link><hr />
+         <Link to="/login-auth">Click Here to Login</Link><hr />
 
         <form id='login-form' onSubmit={handleSubmit}>
         <label>Name</label>
