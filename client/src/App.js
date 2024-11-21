@@ -30,15 +30,15 @@ function App() {
         <Routes>
           <Route path = '/' element = {<Patent />} />
           <Route path="/" element={<Session />} />
-          <Route path = '/patents' element = {<Patent />} />
-          <Route path = '/patents/:id'element = {<PatentById />} />
-          <Route path = '/classifications' element = {<Classification />} />
-          <Route path = '/classifications/:id' element = {<Classification />} />
-          <Route path = '/users' element = {<Login setUser={setUser}/>} />
-          <Route path = '/login' element = {<Signin setUser={setUser}/>} />
-          <Route path = '/users/:id' element = {<Login />} />
-          <Route path = '/uploadpatents' element = {<Uploadpatent />} />
-          <Route path = '/inventors' element = {<Inventors />} />
+          <Route path = '/patents-list' element = {<Patent />} />
+          <Route path = '/in-patents/:id'element = {<PatentById />} />
+          <Route path = '/patent-classifications' element = {<Classification />} />
+          <Route path = '/patent-classifications/:id' element = {<Classification />} />
+          <Route path = '/users-auth' element = {<Login setUser={setUser}/>} />
+          <Route path = '/login-auth' element = {<Signin setUser={setUser}/>} />
+          <Route path = '/users-auth/:id' element = {<Login />} />
+          <Route path = '/uploadpatents-post' element = {<Uploadpatent />} />
+          <Route path = '/inventors-list' element = {<Inventors />} />
         </Routes>
       </main>
     </div>
